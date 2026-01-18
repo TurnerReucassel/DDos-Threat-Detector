@@ -1,0 +1,7 @@
+.env
+data/raw/
+data/processed/
+artifacts/models/
+__pycache__/
+.venv/
+venv/
