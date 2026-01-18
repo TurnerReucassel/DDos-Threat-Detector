@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ddos}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ddos_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-ddosdb}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ddos_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ddos} -d ${POSTGRES_DB:-ddosdb}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-ddos}:${POSTGRES_PASSWORD:-ddos_dev_password}@postgres:5432/${POSTGRES_DB:-ddosdb}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  ddos_pgdata:
+
