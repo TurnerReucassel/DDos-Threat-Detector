@@ -1,4 +1,4 @@
-
+.DS_Store
 .env
 
 # Data
@@ -9,10 +9,11 @@ data/processed/
 artifacts/models/
 artifacts/schemas/
 
+
 __pycache__/
 *.pyc
 .venv/
 venv/
 
-
+# Node
 frontend/node_modules/
