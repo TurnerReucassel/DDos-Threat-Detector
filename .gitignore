@@ -1,5 +1,4 @@
 
-# Secrets
 .env
 
 # Data
@@ -10,11 +9,10 @@ data/processed/
 artifacts/models/
 artifacts/schemas/
 
-# Python
 __pycache__/
 *.pyc
 .venv/
 venv/
 
-# Node
+
 frontend/node_modules/
